@@ -1,11 +1,11 @@
 const NavBar = () => {
     return (
-        <div class="flex">
+        <div className="flex">
             <div>
-                <h1 class='m-8 text-2xl font-bold text-blue-800'>ClickApp</h1>
+                <h1 className='m-8 text-2xl font-bold text-blue-800'>ClickApp</h1>
             </div>
 
-            <div class="flex pt-9 w-5/6 bg-slate-800 text-slate-100">
+            <div className="flex pt-9 w-5/6 bg-slate-800 text-slate-100">
                 <a href=""><p class="ml-8 hover:bg-slate-500">Home</p></a>
                 <a href=""><p class="ml-8 hover:bg-slate-500">Tickets</p></a>
                 <a href=""><p class="ml-8 hover:bg-slate-500">About</p></a>

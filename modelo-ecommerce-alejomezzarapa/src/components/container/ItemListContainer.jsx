@@ -4,8 +4,7 @@ import ItemList from '../ItemList'
 const ItemListContainer = () => {
   return (
     <div>
-      <div className="'m-8 text-3xl text-center font-bold text-blue-800'">Bienvenido a ClickApp</div>
-      <div className="flex-auto"><ItemList></ItemList></div>
+        <div className="flex-auto m-8"><ItemList></ItemList></div>
     </div>
     )
 }

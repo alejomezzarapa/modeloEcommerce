@@ -1,13 +1,17 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from './context/CartContext'
-import {ItemCount} from './ItemCount'
+import ItemCount from './ItemCount'
 
-const ItemCard = ({itemData}) => {
+const ItemCard = (itemData) => {
   
-  const {addSeleccionados} = useContext(CartContext)
-  const {addOn} = useContext(ItemCount)       
-
+  const cartContext = useContext(CartContext)
+  const {addSeleccionados} = cartContext;
+  
+  const onAdd = (q)=>{
+      addSeleccionados(itemData ,q)  
+  }
+      
   return (
     <>  
     <div className="mx-3 card  w-1/3 bg-base-100 shadow-xl">
@@ -20,9 +24,8 @@ const ItemCard = ({itemData}) => {
                 <div className="badge badge-secondary">{itemData.price}</div>
                     <p>{itemData.description}</p>
                 </div>
-        </Link>
-        <button onClick={()=>{addSeleccionados(itemData.id)}} className='bg-slate-500 text-slate-200 font-semibold m-2 p-1 rounded-sm'> Subir al carrito </button>      
-        <button onClick={()=>{addOn(itemData.id)}} className='bg-slate-500 text-slate-200 font-semibold m-2 p-1 rounded-sm'> Comprar </button>                    
+        </Link>      
+        <ItemCount stock={itemData.stock} initial={1} onAdd={onAdd}/>
     </div>
     </>
     )

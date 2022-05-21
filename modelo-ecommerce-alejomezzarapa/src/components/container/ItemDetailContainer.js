@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { item } from '../Item'
 import ItemCard from "../ItemCard";
-import ItemCount from '../ItemCount';
 import ItemSelect from '../ItemSelect';
 import LoadingGif from '../loading/LoadingGif';
 
 const ItemDetailContainer = () => {
     
     const { itemId } = useParams ()
-    const [itemInfo, setItemInfo] = useState( {} )
+    const [itemInfo, setItemInfo] = useState( [] )
     const [loading, setLoading] = useState (true)
      
     useEffect( () => {

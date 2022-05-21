@@ -1,33 +1,52 @@
-import {children, createContext } from 'react';
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 
-export const ItemCount = createContext ({
-    qty: [],
-    addOn: () => {}, 
-})
+const ItemCount = ({initial, stock, onAdd}) => {
+    const [q, setQ] = useState(initial);
+    const [showButton, setShowButton] = useState (false)
 
-const ItemCountProvider = ({children}) => {
-  const [qty, setQty] = useState([]);
+    let history = useNavigate();
 
-  const addOn = (num) => {
-    setQty (currentQty => {    
-        return currentQty.concat(num)
-    })
-    }
-
-const context = {
-    qty,
-    addOn,
-}
+    const addProduct = (num) => {
+        setQ (q+num)
+    };
 
   return (
-      <>
-        <ItemCount.Provider value={context} >
-            {children}
-            <button>Terminar tu compra</button>
-        </ItemCount.Provider>
-     </>  
-    );
+    <div className="count-container">
+      <div className="count-container__contador">
+        <button
+          className="count-container__button"
+          onClick={() => addProduct(-1)}
+          disabled={q === initial ? true : null}
+        >
+          -
+        </button>
+        <span className="count-container__qty">{q}</span>
+        <button
+          className="count-container__button"
+          onClick={() => addProduct(+1)}
+          disabled={q === stock ? true : null}
+        >
+          +
+        </button>
+      </div>
+
+      <button
+        className="button-primary"
+        onClick={() => {onAdd(q); setShowButton(true)}}
+        disabled={stock === 0 ? true : null}
+      >
+        Añadir
+      </button>
+      { (showButton && history.location.pathname.includes('/detail') ) && <button
+        onClick={()=>{history.push('/cart')}}
+        className="button-primary button-finalizar-compra"
+      >
+        Finalizar compra
+      </button>}
+    </div>
+  );
 };
 
-export default ItemCountProvider;
+export default ItemCount;
